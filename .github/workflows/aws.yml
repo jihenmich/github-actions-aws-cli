@@ -1,0 +1,22 @@
+name: AWS S3 LS Command
+
+on:
+  push:
+    branches:
+      - main  # Du kannst auch andere Branches hier angeben, je nach Bedarf
+
+jobs:
+  aws-s3-ls:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Set up AWS CLI
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+        # aws-session-token: xxx
+
+    - name: Run AWS S3 LS Command
+      run: aws s3 ls
